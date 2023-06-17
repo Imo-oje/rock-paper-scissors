@@ -2,45 +2,41 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection){
         console.log("Draw")
     }else if (playerSelection === "paper" && computerSelection === "rock" ){
-        console.log("player wins")
+        console.log("you won")
     }else if (playerSelection === "rock" && computerSelection === "scissors"){
-        console.log("player wins")
+        console.log("you won")
     }else if (playerSelection === "scissors" && computerSelection === "paper"){
-        console.log("player wins")
+        console.log("you won")
     }else if (playerSelection === "rock" && computerSelection === "paper" ){
-        console.log("computer wins")
+        console.log("computer won")
     }else if (playerSelection === "scissors" && computerSelection === "rock"){
-        console.log("computer wins")
+        console.log("computer won")
     }else if (playerSelection === "paper" && computerSelection === "scissors"){
-        console.log("computer wins")
+        console.log("computer won")
+    }else if(playerSelection === null || " " ){
+        alert("please choose between the valid options - rock', 'paper', 'scissors'")
     }else {
-        console.log("incomplete game")
+       console.log( "Sorry the game crashed. Try again!")
     }
-    
-    
-}
+};
 
-playRound("scissors", "paper")
-
-// paper beats rock
-//rock beats scissors
-//scissors beats paper
-//
-
-/* function getComputerChoice() {
+function getComputerChoice() {
     const choice = ["rock", "paper", "scissors"];
     const random = Math.floor(Math.random() * choice.length);
     return choice[random]
-} */
-
-/* function getPlayerChoice() {
-   const player = prompt("choose between rock paper and scissors").toLocaleLowerCase();
-   console.log(player)
 }
-getPlayerChoice() */
+
+function getPlayerChoice() {
+    const player = prompt("choose between rock paper and scissors");
+    if (player !== null) {
+        return (player.toLowerCase());
+    }else {
+        console.log("player's result is null")
+    }
+ }
    
-/* const playerSelection = "rock";
+const playerSelection = getPlayerChoice();
 const computerSelection = getComputerChoice();
-console.log(`computer: ${computerSelection};`)
-console.log(`player: ${playerSelection};`) */
-//console.log(playRound(playerSelection, computerSelection));
+playRound(playerSelection, computerSelection);
+console.log (`player: ${playerSelection}`)
+console.log (`computer: ${computerSelection}`)
