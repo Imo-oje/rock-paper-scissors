@@ -4,58 +4,50 @@ function getComputerChoice() {
   const random = Math.floor(Math.random() * choice.length);
   return choice[random];
 }
-/* player choice */
-function getPlayerChoice() {
-  const player = prompt("choose between rock paper and scissors");
-  if (player !== null) {
-    return player.toLowerCase();
-  } else {
-    console.log("player's result is null");
-  }
-}
 
-let playerScore = 0;
-let computerScore = 0;
+const btn = document.querySelectorAll("button");
+const playerBoard = document.querySelector(".player-selected");
+const computerBoard = document.querySelector(".computer-selected");
+const result = document.querySelector(".result");
+let playerScore = document.querySelector(".player-score");
+let computerScore = document.querySelector(".computer-score");
+
+let playerS = 0;
+let computerS = 0;
+
 let count = 0;
-while (count < 3) {
-  function playRound(player, computer) {
-    if (player === computer) {
-      count += 1;
-    } else if (player === "paper" && computer === "rock") {
-      playerScore += 1;
-      count += 1;
-    } else if (player === "rock" && computer === "scissors") {
-      playerScore += 1;
-      count += 1;
-    } else if (player === "scissors" && computer === "paper") {
-      playerScore += 1;
-      count += 1;
-    } else if (player === "rock" && computer === "paper") {
-      computerScore += 1;
-      count += 1;
-    } else if (player === "scissors" && computer === "rock") {
-      computerScore += 1;
-      count += 1;
-    } else if (player === "paper" && computer === "scissors") {
-      computerScore += 1;
-      count += 1;
-    } else if (player === null || " ") {
-      alert(
-        "please choose between the valid options - rock', 'paper', 'scissors'"
-      );
-    } else {
-      console.log("Sorry the game crashed. Try again!");
-    }
+function playRound(player, computer) {
+  if (player === computer) {
+    result.textContent = "draw";
+  } else if (
+    (player === "paper" && computer === "rock") ||
+    (player === "rock" && computer === "scissors") ||
+    (player === "scissors" && computer === "paper")
+  ) {
+    result.textContent = "you win!";
+    playerS += 1;
+    playerScore.textContent = "player: " + playerS;
+  } else if (
+    (player === "rock" && computer === "paper") ||
+    (player === "scissors" && computer === "rock") ||
+    (player === "paper" && computer === "scissors")
+  ) {
+    result.textContent = "you loose!";
+    computerS += 1;
+    computerScore.textContent = "computer: " + computerS;
+  } else if (player === null || " ") {
+    alert(
+      "please choose between the valid options - rock', 'paper', 'scissors'"
+    );
+  } else {
+    console.log("Sorry the game crashed. Try again!");
   }
+  playerBoard.textContent = player;
+  computerBoard.textContent = computer;
+}
 
-  playRound(getPlayerChoice(), getComputerChoice());
-}
-console.log(playerScore);
-console.log(computerScore);
-if (computerScore > playerScore) {
-  console.log("you loose");
-} else if (computerScore < playerScore) {
-  console.log("you won");
-} else {
-  console.log("it's a tie game!");
-}
+btn.forEach((button) => {
+  button.addEventListener("click", () => {
+    playRound(button.textContent.toLowerCase(), getComputerChoice());
+  });
+});
